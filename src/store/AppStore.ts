@@ -3,10 +3,10 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 //Sagas
-import { msgSagas } from "./msgSaga";
+import { feedSagas } from "./Feed/feedSaga";
 
 //Reducers
-import message from "./msgReducer";
+import feed from "./Feed/feedReducer";
 
 export class AppStore {
 
@@ -30,12 +30,12 @@ export class AppStore {
 
         //Allows the store to be broken into different states
         const rootReducer = combineReducers({
-            message
+            feed
         });
 
         //Set up sagas
         function* rootSaga() {
-            yield all([...msgSagas()]);
+            yield all([...feedSagas()]);
         }
 
         this.store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
