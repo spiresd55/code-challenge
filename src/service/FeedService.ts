@@ -14,7 +14,7 @@ export class FeedService {
     }
 
     async getComments(postId: number) {
-        const results = await fetch(`${this.baseUrl}/comments>postId=${postId}`);
+        const results = await fetch(`${this.baseUrl}/comments?postId=${postId}`);
         if(results.status !== 200) {
             return [];
         } else {

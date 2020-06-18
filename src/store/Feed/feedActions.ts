@@ -1,7 +1,12 @@
 export enum FEED_ACTIONS {
-    GET_COMMENTS_SUCCESS = "GET_COMMENTS_SUCCESS",
-    GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS",
-    ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS",
+    DISPLAY_ERROR = "DISPLAY_ERROR",
+    CLEAR_ERROR = "CLEAR_ERROR",
+
+    //Redux ORM
+    CREATE_POSTS = "CREATE_POSTS",
+    CREATE_COMMENTS = "CREATE_COMMENTS",
+
+    //Saga watchers
     GET_COMMENTS = "GET_COMMENTS",
     GET_POSTS = "GET_POSTS"
 }
@@ -14,18 +19,12 @@ const getPosts = () => {
     return { type: FEED_ACTIONS.GET_POSTS}
 };
 
-const getCommentsSuccess = (comments: any[]) => { //TODO: typecheck this
-    return { type: FEED_ACTIONS.GET_COMMENTS_SUCCESS, comments };
+const displayError = (error: string) => { //TODO: typecheck this
+    return { type: FEED_ACTIONS.DISPLAY_ERROR, error };
 };
-
-const getPostsSuccess = (posts: any[]) => { //TODO: Typecheck this
-    return { type: FEED_ACTIONS.GET_POSTS_SUCCESS, posts}
-};
-
 
 export const FEED_ACTION_CREATOR = {
     getComments,
     getPosts,
-    getCommentsSuccess,
-    getPostsSuccess
-};
+    displayError,
+}

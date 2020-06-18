@@ -13,12 +13,20 @@ import FeedService from "../../service/FeedService";
 }*/
 
 export function* GetComments(action: any) {
-    yield put(FEED_ACTION_CREATOR.getCommentsSuccess([]))
+   // yield put(FEED_ACTION_CREATOR.getCommentsSuccess([]))
 }
 
 export function* GetPosts(action: any) {
-    const result = yield FeedService.getPosts();
-    yield put(FEED_ACTION_CREATOR.getPostsSuccess([]))
+    const posts = yield FeedService.getPosts();
+    const comments = yield FeedService.getComments(1);
+
+        yield put({type: "CREATE_POSTS",payload: {
+            posts
+        }})
+
+    yield put({type: "CREATE_COMMENTS", payload: {comments}});
+
+   // yield put(FEED_ACTION_CREATOR.getPostsSuccess([]))
 }
 
 export function* watch() {

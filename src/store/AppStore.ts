@@ -1,5 +1,6 @@
 import { combineReducers, createStore, applyMiddleware, Store } from "redux";
 import createSagaMiddleware from "redux-saga";
+import {createReducer} from "redux-orm";
 import { all } from "redux-saga/effects";
 
 //Sagas
@@ -7,6 +8,9 @@ import { feedSagas } from "./Feed/feedSaga";
 
 //Reducers
 import feed from "./Feed/feedReducer";
+
+//ORM
+import orm from "./models/Orm";
 
 export class AppStore {
 
@@ -30,7 +34,8 @@ export class AppStore {
 
         //Allows the store to be broken into different states
         const rootReducer = combineReducers({
-            feed
+            feed,
+            entities: createReducer(orm)
         });
 
         //Set up sagas
@@ -41,6 +46,8 @@ export class AppStore {
         this.store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
         sagaMiddleware.run(rootSaga);
+
+        console.log(this.store.getState());
     }
 }
 
