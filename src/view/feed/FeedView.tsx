@@ -1,11 +1,30 @@
-import React, {useEffect} from "react";
-import {Grid} from "@material-ui/core";
+import React, {useEffect, FunctionComponent} from "react";
+import {Grid, CircularProgress} from "@material-ui/core";
 import PostList from "./PostList";
+import {PostFields} from "../../store/models/Post";
+import {makeStyles} from "@material-ui/core";
+import {displayLoader} from "../../store/UI/UISelectors";
 
-//@ts-ignore
-const FeedView = ({ test, actions, posts}) => {
+const useStyles = makeStyles({
+    root: {
+        marginTop: 60,
+    },
+    loader: {
+        top: "50%",
+        position: "fixed"
+    }
+});
+
+interface ComponentProps {
+    actions: any,
+    posts: PostFields[];
+    displayLoader: boolean;
+}
+
+const FeedView: FunctionComponent<ComponentProps> = ({ actions, posts, displayLoader}) => {
+    const classes = useStyles();
+
     useEffect(() => {
-        console.log('Feed View Loaded')
         actions.getPosts();
     }, []); //Reset the message when the msg prop changes
 
@@ -13,19 +32,23 @@ const FeedView = ({ test, actions, posts}) => {
         actions.getComments(postId);
     };
 
-    const handleCommentSubmit = (props: any) => {
-        console.log(props);
-        console.log("submit comment")
+    const handleCommentSubmit = (values: any, postId: number) => {
+        actions.createComment(values.comment, postId);
     };
 
     return <Grid container
+                 className={classes.root}
                  direction="row"
                  justify="center">
-                <PostList
-                    posts={posts}
-                    onPostClick={onPostClick}
-                    handleCommentSubmit={handleCommentSubmit}
-                />
+                {displayLoader && <CircularProgress className={classes.loader}/> }
+                {!displayLoader &&
+                    <PostList
+                        posts={posts}
+                        onPostClick={onPostClick}
+                        handleCommentSubmit={handleCommentSubmit}
+                    />
+                }
+
             </Grid>;
 };
 

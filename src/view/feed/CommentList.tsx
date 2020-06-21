@@ -1,5 +1,6 @@
-import React, {useEffect} from "react";
+import React, {FunctionComponent} from "react";
 import {Grid, Typography, makeStyles} from "@material-ui/core";
+import {CommentFields} from "../../store/models/Comment";
 
 const useStyles = makeStyles({
     header: {
@@ -17,8 +18,12 @@ const useStyles = makeStyles({
     }
 });
 
+interface ComponentProps {
+    comments: CommentFields[]
+}
+
 //@ts-ignore
-const CommentList = ({comments}) => {
+const CommentList: FunctionComponent<ComponentProps> = ({comments}) => {
     const classes = useStyles();
 
     return <Grid container
@@ -27,7 +32,11 @@ const CommentList = ({comments}) => {
                  justify="center">
         {comments.map((comment: any) => (
             <Grid item xs={12}>
-                <Typography component="div" variant="subtitle1" className={classes.header}>
+                <Typography
+                    component="div"
+                    variant="subtitle1"
+                    className={classes.header}
+                >
                     <Typography component="span" variant={"inherit"} color="textSecondary">{comment.email}</Typography>
                 </Typography>
                 <Typography className={classes.body}>{comment.body}</Typography>

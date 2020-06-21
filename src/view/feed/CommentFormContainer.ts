@@ -1,6 +1,8 @@
 import CommentForm from "./CommentForm";
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
+import { compose } from 'redux';
 
-export default reduxForm({
-    form: 'comment'
-})(CommentForm)
+
+export default compose(
+    reduxForm({}),
+)(CommentForm);

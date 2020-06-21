@@ -1,14 +1,14 @@
 export enum FEED_ACTIONS {
-    DISPLAY_ERROR = "DISPLAY_ERROR",
-    CLEAR_ERROR = "CLEAR_ERROR",
-
     //Redux ORM
     CREATE_POSTS = "CREATE_POSTS",
     CREATE_COMMENTS = "CREATE_COMMENTS",
 
     //Saga watchers
     GET_COMMENTS = "GET_COMMENTS",
-    GET_POSTS = "GET_POSTS"
+    GET_POSTS = "GET_POSTS",
+
+    //Other
+    CREATE_COMMENT = "CREATE_COMMENT",
 }
 
 const getComments = (postId: number) => {
@@ -23,18 +23,18 @@ const createComments = (comments: any) => {
   return { type: FEED_ACTIONS.CREATE_COMMENTS, payload: {comments}}
 };
 
-const createPosts = (posts: any) => {
-    return { type: FEED_ACTIONS.CREATE_POSTS, payload: {posts}}
+const createComment = (body: string, postId: number) => {
+    return { type: FEED_ACTIONS.CREATE_COMMENT, payload: {body, postId}}
 };
 
-const displayError = (error: string) => { //TODO: typecheck this
-    return { type: FEED_ACTIONS.DISPLAY_ERROR, error };
+const createPosts = (posts: any) => {
+    return { type: FEED_ACTIONS.CREATE_POSTS, payload: {posts}}
 };
 
 export const FEED_ACTION_CREATOR = {
     getComments,
     getPosts,
-    displayError,
     createPosts,
     createComments,
-}
+    createComment
+};

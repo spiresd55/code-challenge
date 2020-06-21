@@ -1,10 +1,13 @@
-import { attr, Model, ModelType, many } from 'redux-orm';
+import { attr, Model } from 'redux-orm';
+import {CommentFields} from "./Comment";
+import {FEED_ACTIONS} from "../Feed/feedActions";
 
 export interface PostFields {
     userId: number;
     id: number;
     title: string;
     body: string;
+    comments: CommentFields[]; //This will be set with the fk function in Comment.ts
 }
 
 export class Post extends Model<typeof Post, PostFields> {
@@ -19,7 +22,7 @@ export class Post extends Model<typeof Post, PostFields> {
 
     static reducer(action: any, Post: any, session: any) {
         switch(action.type) {
-            case 'CREATE_POSTS': {
+            case FEED_ACTIONS.CREATE_POSTS: {
                 action.payload.posts.forEach((post: any) => {
                    Post.create(post);
                 });

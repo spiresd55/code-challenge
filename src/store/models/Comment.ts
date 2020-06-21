@@ -1,4 +1,6 @@
-import { attr, Model, fk, ModelType } from 'redux-orm';
+import { attr, Model, fk } from 'redux-orm';
+import { v4 as uuid } from 'uuid';
+import {FEED_ACTIONS} from "../Feed/feedActions";
 
 export interface CommentFields {
     id: number;
@@ -25,9 +27,19 @@ export class Comment extends Model<typeof Comment, CommentFields> {
 
     static reducer(action: any, Comment: any, session: any) {
         switch(action.type) {
-            case 'CREATE_COMMENTS': {
+            case FEED_ACTIONS.CREATE_COMMENTS: {
                 action.payload.comments.forEach((comment: any) => {
                     Comment.create(comment);
+                });
+                break;
+            }
+            case FEED_ACTIONS.CREATE_COMMENT: {
+                Comment.create({
+                    id: uuid(),
+                    name: 'test', //NOTE: This would be set if a user was logged in
+                    email: 'test@test.com', //NOTE: This would be set if a user was logged in
+                    body: action.payload.body,
+                    postId: action.payload.postId,
                 });
                 break;
             }

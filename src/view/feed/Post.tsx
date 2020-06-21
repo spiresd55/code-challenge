@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState, FunctionComponent} from "react";
 import {Card, CardContent, Typography, Button, Divider, CardHeader} from "@material-ui/core";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentFormContainer";
 import { makeStyles } from '@material-ui/core/styles';
+import {PostFields} from "../../store/models/Post";
 
 const useStyles = makeStyles({
     root: {
@@ -24,21 +25,30 @@ const useStyles = makeStyles({
     }
 });
 
+interface ComponentProps {
+    post: PostFields;
+    onPostClick: (postId: number) => void;
+    handleCommentSubmit: (values: any, postId: number) => void;
+};
 
-//@ts-ignore
-const Post = ({post, onPostClick, handleCommentSubmit}) => {
+const Post: FunctionComponent<ComponentProps> = ({post, onPostClick, handleCommentSubmit}) => {
 
     const classes = useStyles();
 
+    //Opens the comments section, the parent container dispatches action to retrieve comments
     const handleClick = () => {
-        console.log("handling click");
-        console.log(isOpen);
         setIsOpen(!isOpen);
+
         //Call back to send to parent component
-        console.log(post.id);
         onPostClick(post.id);
     };
 
+    //This will send the values of the form, and the ID of the post to the parent component
+    const onCommentSubmit = (values: any) => {
+        handleCommentSubmit(values, post.id)
+    };
+
+    //UseState hook
     const [isOpen, setIsOpen] = useState(false);
 
     return <Card className={classes.root}>
@@ -62,13 +72,15 @@ const Post = ({post, onPostClick, handleCommentSubmit}) => {
                         </Button>
                     </React.Fragment>
                 )}
-                {isOpen && (
+                {(isOpen && post.comments.length > 0) && (
                     <React.Fragment>
                         <Divider className={classes.divider}/>
                         <Typography className={classes.title}>{post.comments.length} Comments</Typography>
-                        <CommentList comments={post.comments}></CommentList>
-                        <CommentForm onSubmit={handleCommentSubmit}/>
+                        <CommentList comments={post.comments}/>
                     </React.Fragment>
+                )}
+                {(isOpen) && (
+                    <CommentForm form={`comment${post.id}`} onSubmit={onCommentSubmit} />
                 )}
             </CardContent>
         </Card>;
