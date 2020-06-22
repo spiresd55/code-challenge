@@ -19,7 +19,7 @@ You will also see any lint errors in the console.
 
 ### `yarn test-coverage`
 
-Launches the test runner in the interactive watch mode.<br />
+Launches the test runner<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### Tech Stack Used
@@ -35,14 +35,14 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 - enzyme 
 
 ### Project Structure
-- / : The root directory contains package.json file and compiler configurations for typescript
-- /src : This directory contains all files that handles the bootstraping of the app and setting up the tests
-- /src/store : This directory contains the AppStore.js file and sub state directories for the redux store
-- /src/store/UI: Contains action creators and reducer for state related to page level state (such as show loader)
-- /src/store/Feed: Contains action creators, action types, reducers, and sagas for Feed type actions
-- /src/store/model: This directory sets up the redux-orm and contains a Model for both Post and Comments
-- /src/service: This directory contains the FeedService which injests the Apis provided in the challenge
-- /src/view: Contains the feed view and the components that make the feed work
+- **/** : The root directory contains package.json file and compiler configurations for typescript
+- **/src** : This directory contains all files that handles the bootstraping of the app and setting up the tests
+- **/src/store** : This directory contains the AppStore.js file and sub state directories for the redux store
+- **/src/store/UI**: Contains action creators and reducer for state related to page level state (such as show loader)
+- **/src/store/Feed**: Contains action creators, action types, reducers, and sagas for Feed type actions
+- **/src/store/model**: This directory sets up the redux-orm and contains a Model for both Post and Comments
+- **/src/service**: This directory contains the FeedService which injests the Apis provided in the challenge
+- **/src/view**: Contains the feed view and the components that make the feed work
 
 ### Other Notes
 - I created Container files to set up HOC's across the app. I ignored files for testing that contained Container in its name.
