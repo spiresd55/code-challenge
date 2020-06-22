@@ -47,12 +47,12 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 ### Other Notes
 - I created Container files to set up HOC's across the app. I ignored files for testing that contained Container in its name.
 - Comment.ts and Post.ts within the /src/store/model directory contain a reducer to handle creating posts and comments in the redux store and relating them to each other
-- The async calls to the server happen with FeedSaga.js
+- The async calls to the server happen within FeedSaga.ts
 - I used hooks instead of lifecycle events
-- Generally I would have a /src/components directory. This would contain common components that can be used across the app. Also like setup storybooks for these reusable components. https://github.com/storybookjs/storybook
-- I didn't get a chance to write the error handling for bad api calls. If I had more time I would have placed a try catch block within the saga, and dispatch an action creator on error. The error would displayed to the user as a notification banner on the top of the screen.
-- I used material-ui to build this, so I could focus more at the task at hand.
+- Generally I would have a /src/components directory. This would contain common components that can be used across the app. I also like to setup storybooks for these reusable components. https://github.com/storybookjs/storybook
+- I didn't get a chance to write the error handling for bad api requests. If I had more time I would have placed a try catch block within the saga, and dispatch an action creator on error. The error would displayed to the user as a notification banner on the top of the screen.
+- I used material-ui to build this so I could focus more at the task at hand.
 - I would have made the createStyles css within each Component more modular if given more time.
-- A note about how I like to test react components. If its a reusable component within /src/components, I would shallow render the component and write tests to test the individual functionality of the component. If the component is only displaying data to the user with absolutely 0 logic, i would use a snapshot. When I test views, I like the test the entire tree of that view. I will mock the store. All the other tests in the application are unit tested and mocked correctly. 
+- A note about how I like to test react components. If its a reusable component within /src/components, I would shallow render the component and write tests to test the individual functionality of the component. If the component is only displaying data to the user with absolutely 0 logic, i would use a snapshot. When I test views, I like the test the entire tree of that view(Mounted Enzyme Test). All the other tests in the application are unit tested and mocked correctly. 
 - This code has greater than 95% code coverage. 
 - In the package.json file, I usually would have all the typings and testing libraries within the devDependencies.
