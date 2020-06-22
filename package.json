@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^24.0.0",
@@ -16,14 +19,16 @@
     "@types/uuid": "^8.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "jest-fetch-mock": "^3.0.3",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "3.4.0",
     "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
     "redux-form": "^8.3.6",
+    "redux-mock-store": "^1.5.4",
     "redux-orm": "^0.16.1",
     "redux-saga": "^1.1.3",
     "reselect": "^4.0.0",
@@ -34,7 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test-coverage": "npm run test -- --coverage"
+    "test-coverage": "npm run test -- --coverage --watchAll=false"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,6 +64,12 @@
         "lines": 90,
         "statements": 90
       }
-    }
+    },
+    "coveragePathIgnorePatterns": [
+      "/src/store/AppStore.ts",
+      "/src/store/models/Orm.ts",
+      "/src/index.tsx",
+      "(\\w.*)Container.[tj]s"
+    ]
   }
 }

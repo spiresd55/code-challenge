@@ -9,6 +9,7 @@ export enum FEED_ACTIONS {
 
     //Other
     CREATE_COMMENT = "CREATE_COMMENT",
+    DISPLAY_ERROR = "DISPLAY_ERROR",
 }
 
 const getComments = (postId: number) => {

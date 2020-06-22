@@ -22,7 +22,6 @@ interface ComponentProps {
     comments: CommentFields[]
 }
 
-//@ts-ignore
 const CommentList: FunctionComponent<ComponentProps> = ({comments}) => {
     const classes = useStyles();
 

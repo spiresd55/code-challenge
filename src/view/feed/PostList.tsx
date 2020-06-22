@@ -15,8 +15,8 @@ const PostList: FunctionComponent<ComponentProps> = ({posts, onPostClick, handle
                  justify="center"
                  spacing={1}
                  >
-            {posts.map((post: any) => (
-                <Grid item xs={11} md={8}>
+            {posts.map((post: any, index) => (
+                <Grid item xs={11} md={8} key={`post${index}`}>
                     <Post post={post} onPostClick={onPostClick} handleCommentSubmit={handleCommentSubmit}/>
                 </Grid>
             ))}

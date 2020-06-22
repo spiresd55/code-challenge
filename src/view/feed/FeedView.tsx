@@ -3,7 +3,6 @@ import {Grid, CircularProgress} from "@material-ui/core";
 import PostList from "./PostList";
 import {PostFields} from "../../store/models/Post";
 import {makeStyles} from "@material-ui/core";
-import {displayLoader} from "../../store/UI/UISelectors";
 
 const useStyles = makeStyles({
     root: {
@@ -36,20 +35,22 @@ const FeedView: FunctionComponent<ComponentProps> = ({ actions, posts, displayLo
         actions.createComment(values.comment, postId);
     };
 
-    return <Grid container
-                 className={classes.root}
-                 direction="row"
-                 justify="center">
-                {displayLoader && <CircularProgress className={classes.loader}/> }
-                {!displayLoader &&
-                    <PostList
-                        posts={posts}
-                        onPostClick={onPostClick}
-                        handleCommentSubmit={handleCommentSubmit}
-                    />
-                }
-
-            </Grid>;
+    return (
+        <Grid container
+              className={classes.root}
+              direction="row"
+              justify="center"
+        >
+            {displayLoader && <CircularProgress className={classes.loader}/> }
+            {!displayLoader &&
+                <PostList
+                    posts={posts}
+                    onPostClick={onPostClick}
+                    handleCommentSubmit={handleCommentSubmit}
+                />
+            }
+        </Grid>
+    );
 };
 
 export default FeedView;

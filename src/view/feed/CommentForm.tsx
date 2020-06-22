@@ -9,18 +9,14 @@ const useStyles = makeStyles({
     }
 });
 
-//Move To Seperate file
+//TODO: Move To Seperate file and make label customizable
 const renderTextField = ({
-                             input,
-                             label,
-                             meta: { touched, error },
-                             ...custom
-                         }: any) => (
+     input,
+     label,
+     meta: { touched, error },
+     ...custom
+}: any) => (
     <TextField
-        hintText={label}
-        floatingLabelText={label}
-        errorText={touched && error}
-
         label="Leave A Comment"
         multiline
         rows={4}
@@ -29,10 +25,9 @@ const renderTextField = ({
         {...input}
         {...custom}
     />
-)
+);
 
 const CommentForm: FunctionComponent<InjectedFormProps> = ({handleSubmit }) => {
-    //@ts-ignore
     const classes = useStyles();
     return (
         <form onSubmit={handleSubmit}>
