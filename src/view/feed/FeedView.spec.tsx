@@ -1,5 +1,4 @@
 import React from "react";
-import { render, fireEvent, getByTestId} from "@testing-library/react";
 import {mount} from "enzyme";
 import FeedView from "./FeedView";
 import '@testing-library/jest-dom'
